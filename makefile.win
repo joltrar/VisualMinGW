@@ -1,0 +1,48 @@
+# Project: Visual MinGw
+# Makefile created by Embarcadero Dev-C++ 6.3
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = Visual_MinGw_private.res
+OBJ      = src/CList.o src/editor.o src/main.o src/process.o src/project.o src/winui.o $(RES)
+LINKOBJ  = src/CList.o src/editor.o src/main.o src/process.o src/project.o src/winui.o $(RES)
+LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib" -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc -mwindows -lcomctl32 -lole32
+INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
+CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
+BIN      = "Visual MinGw.exe"
+CXXFLAGS = $(CXXINCS) -I"C:/dev/vming/include/" -fpermissive -W -Wall -pedantic -g -fno-rtti
+CFLAGS   = $(INCS) -I"C:/dev/vming/include/" -fpermissive -W -Wall -pedantic -g -fno-rtti
+DEL      = C:\Program Files (x86)\Embarcadero\Dev-Cpp\devcpp.exe INTERNAL_DEL
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${DEL} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+src/CList.o: src/CList.cpp
+	$(CPP) -c src/CList.cpp -o src/CList.o $(CXXFLAGS)
+
+src/editor.o: src/editor.cpp
+	$(CPP) -c src/editor.cpp -o src/editor.o $(CXXFLAGS)
+
+src/main.o: src/main.cpp
+	$(CPP) -c src/main.cpp -o src/main.o $(CXXFLAGS)
+
+src/process.o: src/process.cpp
+	$(CPP) -c src/process.cpp -o src/process.o $(CXXFLAGS)
+
+src/project.o: src/project.cpp
+	$(CPP) -c src/project.cpp -o src/project.o $(CXXFLAGS)
+
+src/winui.o: src/winui.cpp
+	$(CPP) -c src/winui.cpp -o src/winui.o $(CXXFLAGS)
+
+Visual_MinGw_private.res: Visual_MinGw_private.rc src/rsrc.rc
+	$(WINDRES) -i Visual_MinGw_private.rc --input-format=rc -o Visual_MinGw_private.res -O coff 
+
